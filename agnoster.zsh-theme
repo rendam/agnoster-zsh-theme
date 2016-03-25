@@ -194,10 +194,10 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_status
-  prompt_virtualenv
-  prompt_rbenv
   prompt_context
   prompt_dir
+  prompt_virtualenv
+  prompt_rbenv
   prompt_git
   prompt_hg
   prompt_end
