@@ -1,31 +1,5 @@
-# vim:ft=zsh ts=2 sw=2 sts=2
-#
-# agnoster's Theme - https://gist.github.com/3712874
-# A Powerline-inspired theme for ZSH
-#
-# # README
-#
-# In order for this theme to render correctly, you will need a
-# [Powerline-patched font](https://gist.github.com/1595572).
-#
-# In addition, I recommend the
-# [Solarized theme](https://github.com/altercation/solarized/) and, if you're
-# using it on Mac OS X, [iTerm 2](http://www.iterm2.com/) over Terminal.app -
-# it has significantly better color fidelity.
-#
-# # Goals
-#
-# The aim of this theme is to only show you *relevant* information. Like most
-# prompts, it will only show git information when in a git working directory.
-# However, it goes a step further: everything from the current user and
-# hostname to whether the last call exited with an error to whether background
-# jobs are running in this shell will all be displayed automatically when
-# appropriate.
-
-### Segment drawing
-# A few utility functions to make it easy and re-usable to draw segmented prompts
-
-### @rendam: additon of showing rbenv versions and altered pyvenv colors
+#  My adaption of agnoster's theme(https://gist.github.com/3712874) with the
+#  additon of showing rbenv versions and altered pyvenv colors
 
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
@@ -158,7 +132,7 @@ prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     local pyvenv=`basename $virtualenv_path`
-    prompt_segment yellow black "($pyvenv)"
+    prompt_segment yellow black "$pyvenv"
   fi
 }
 
@@ -169,9 +143,9 @@ prompt_rbenv() {
   if [[ $rbenv_rubyver != *"system"* ]]; then
     # If the version number is just a number, add 'ruby-' to the string
     if [[ $rbenv_rubyver =~ $re ]]; then
-      prompt_segment red white "(ruby-$rbenv_rubyver)"
+      prompt_segment red white "ruby-$rbenv_rubyver"
     else
-      prompt_segment red white "($rbenv_rubyver)"
+      prompt_segment red white "$rbenv_rubyver"
     fi
   fi
 }
@@ -194,10 +168,10 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_status
-  prompt_context
-  prompt_dir
   prompt_virtualenv
   prompt_rbenv
+  prompt_context
+  prompt_dir
   prompt_git
   prompt_hg
   prompt_end
